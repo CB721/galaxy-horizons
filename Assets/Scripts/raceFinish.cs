@@ -9,8 +9,21 @@ public class raceFinish : MonoBehaviour
     public GameObject FinishCam;
     public GameObject ViewModes;
     public GameObject CompleteTrig;
+    public GameObject FinalTime;
+    public float TotalTime;
+    public GameObject LapPanel;
+    public GameObject ExtraPanel;
+    public GameObject lapTimer;
     
     void OnTriggerEnter () {
+        LapPanel.SetActive (false);
+        ExtraPanel.SetActive (false);
+        // stop timer
+        TotalTime = PlayerPrefs.GetFloat("TotalTime");
+        PlayerPrefs.SetFloat ("TotalTime", lapTimeManager.TotalTime);
+        // lapTimer.SetActive (false);
+        // lapTimeManager.TotalTime = 0;
+        FinalTime.SetActive (true);
         this.GetComponent<BoxCollider>().enabled = false;
         MyCar.SetActive (false);
         CompleteTrig.SetActive (false);

@@ -16,52 +16,60 @@ public class lapTimeManager : MonoBehaviour
     public GameObject TotalTimeDisplay;
     public static float Rawtime;
     public static float TotalTime;
+    public static string timeStr;
     // Update is called once per frame
     void Update()
     {
+        // millicount = totaltime
+        TotalTime += Time.deltaTime * 10;
+        // millidisplay = timestr
+        timeStr = TotalTime.ToString("");
+        // millibox = timetext
+        TotalTimeDisplay.GetComponent<Text>().text = "" + timeStr;
+
         // convert delta time to milliseconds
         milliCount += Time.deltaTime * 10;
         Rawtime += Time.deltaTime;
-
-        // get total time in seconds
-        TotalTime += Time.deltaTime * 100;
-        // running tally to display at the end
-            // animation?
-        // send from server to the browser
-        //test on console
 
         // formatting for milliseconds
         milliDisplay = milliCount.ToString("F0");
         // display milliseconds
         milliBox.GetComponent<Text>().text = "" + milliDisplay;
         // when milliseconds reaches 10
-        if (milliCount >= 10) {
+        if (milliCount >= 9)
+        {
             // set to 0
             milliCount = 0;
             // add to seconds
             secondCount += 1;
         }
         // when seconds under 9
-        if (secondCount <= 9) {
+        if (secondCount <= 9)
+        {
             // display as :09 instead of :90
             secondBox.GetComponent<Text>().text = "0" + secondCount + ".";
-        } else {
+        }
+        else
+        {
             // if greated than 9
             secondBox.GetComponent<Text>().text = "" + secondCount + ".";
         }
         // when seconds reaches 60
-        if (secondCount >= 60) {
+        if (secondCount >= 60)
+        {
             // set to 0
             secondCount = 0;
             // add to minutes
             minuteCount += 1;
         }
         // when minutes under 9
-        if (minuteCount <= 9) {
+        if (minuteCount <= 9)
+        {
             minuteBox.GetComponent<Text>().text = "0" + minuteCount + ":";
-        } else {
+        }
+        else
+        {
             minuteBox.GetComponent<Text>().text = "" + minuteCount + ":";
         }
-        
     }
 }

@@ -8,12 +8,16 @@ public class audioTrigger : MonoBehaviour
     public GameObject countDown;
     public AudioSource Soundtrack;
     public GameObject lapTimer;
+    public GameObject LapPanel;
+    public GameObject ExtraPanel;
+    public GameObject CarBlock;
     void Start()
     {
         StartCoroutine (countStart());
     }
     IEnumerator countStart () {
-        CarController.m_Topspeed = 0.0f;
+        LapPanel.SetActive (false);
+        ExtraPanel.SetActive (false);
         Soundtrack.Play();
         yield return new WaitForSeconds (0.5f);
         countDown.GetComponent<Text>().text = "5";
@@ -38,9 +42,12 @@ public class audioTrigger : MonoBehaviour
         countDown.SetActive(false);
         countDown.GetComponent<Text>().text = "Go!";
         countDown.SetActive(true);
-        CarController.m_Topspeed
-        yield return new WaitForSeconds (1);
+        CarBlock.SetActive(false);
+        // CarController.m_Topspeed;
+        // MyCar.GetComponent<RigidBody>().isKinematic = false;
         countDown.SetActive(false);
         lapTimer.SetActive(true);
+        LapPanel.SetActive (true);
+        ExtraPanel.SetActive (true);
     }
 }
